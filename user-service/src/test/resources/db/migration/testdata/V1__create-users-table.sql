@@ -1,5 +1,3 @@
-
-
 CREATE TABLE USERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255),password VARCHAR(255), dateOfBirth DATE,
         city VARCHAR(255),state VARCHAR(255), country VARCHAR(255),
