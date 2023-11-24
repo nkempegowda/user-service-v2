@@ -7,7 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Setter
@@ -19,7 +20,8 @@ public class UserEntity {
     private Long id;
     private String name;
     private String password;
-    private Date dateOfBirth;
+    @Column("date_of_birth")
+    private LocalDate dateOfBirth;
     private String city;
     private String state;
     private String country;
@@ -29,9 +31,10 @@ public class UserEntity {
     @Column("updatedBy")
     private Long updatedBy;
     @Column("createdAt")
-    private Date createdAt;
+    private LocalDateTime createdAt;
+
     @Column("updatedAt")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
 
 

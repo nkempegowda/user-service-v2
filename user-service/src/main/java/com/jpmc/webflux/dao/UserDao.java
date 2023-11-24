@@ -8,4 +8,6 @@ public interface UserDao {
     Flux<UserDto> getAllUsers();
 
     Mono<UserDto> getUser(Long userId);
+
+    Mono<UserDto> createUser(UserDto userDto);
 }

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Configuration
@@ -28,6 +28,8 @@ public class R2DBCCustomConversionConfiguration {
         List<Converter<?, ?>> converters = new ArrayList<>();
         converters.add(new DateConverter());
         converters.add(new ZonedDateTimeConverter());
+        converters.add(new LocaleDateTimeConverter());
+        converters.add(new SqlDateConverter());
         return R2dbcCustomConversions.of(H2Dialect.INSTANCE, converters);
     }
 
@@ -45,7 +47,7 @@ public class R2DBCCustomConversionConfiguration {
 
             if(null == localDate) return null;
 
-            return Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
+            return Date.valueOf(localDate.toLocalDate());
         }
     }
 
@@ -55,7 +57,27 @@ public class R2DBCCustomConversionConfiguration {
 
             if(null == localDate) return null;
 
-            return Date.from(localDate.toInstant());
+            return Date.valueOf(localDate.toLocalDate());
+        }
+    }
+
+    static class LocaleDateTimeConverter implements Converter<LocalDateTime, Date> {
+        @Override
+        public Date convert(LocalDateTime localDate) {
+
+            if(null == localDate) return null;
+
+            return Date.valueOf(localDate.toLocalDate());
+        }
+    }
+
+    static class SqlDateConverter implements Converter<Date, LocalDateTime> {
+        @Override
+        public LocalDateTime convert(Date localDate) {
+
+            if(null == localDate) return null;
+
+            return localDate.toLocalDate().atStartOfDay();
         }
     }
 }

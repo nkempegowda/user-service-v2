@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
 
        return userDao.getUser(userId);
     }
+
+    @Override
+    public Mono<UserDto> createUser(UserDto userDto) {
+        return userDao.createUser(userDto);
+    }
 }

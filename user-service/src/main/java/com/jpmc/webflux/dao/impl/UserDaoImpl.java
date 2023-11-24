@@ -21,14 +21,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Flux<UserDto> getAllUsers() {
-        return null;
+        Flux<UserEntity> allUsers = userRepository.findAll();
+        return allUsers.map(userEntityMapper::convertToDto);
     }
 
     @Override
     public Mono<UserDto> getUser(Long userId) {
         Mono<UserEntity> userEntityMono = userRepository.findById(userId);
-        //  userEntityMono.subscribe(userEntity -> {});
         return userEntityMono.map(userEntityMapper::convertToDto);
-        // return null;
     }
+
+    @Override
+    public Mono<UserDto> createUser(UserDto userDto) {
+        UserEntity userEntity = userEntityMapper.convertToEntity(userDto);
+        return userRepository.save(userEntity).map(userEntityMapper::convertToDto);
+    }
+
+
 }

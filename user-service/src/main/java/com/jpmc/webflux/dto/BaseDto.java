@@ -11,8 +11,5 @@ import java.util.Date;
 @Getter
 public class BaseDto {
 
-    private Long createdBy;
-    private Long updatedBy;
-    private Date createdAt;
-    private Date updatedAt;
+
 }

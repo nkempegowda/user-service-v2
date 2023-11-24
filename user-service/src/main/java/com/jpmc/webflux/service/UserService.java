@@ -9,5 +9,7 @@ public interface UserService {
 
     Mono<UserDto> getUser(Long userId);
 
+    Mono<UserDto> createUser(UserDto userDto);
+
 
 }

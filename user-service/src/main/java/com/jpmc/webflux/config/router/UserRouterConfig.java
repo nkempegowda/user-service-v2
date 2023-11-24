@@ -17,9 +17,12 @@ public class UserRouterConfig {
 
     public static final String GET_USER_BY_ID_URL = "/api/users/{id}";
 
+    public static final String CREATE_USER_URL = "/api/users";
+
     @Bean
     public RouterFunction<ServerResponse> userRouter(UserHandler userHandler){
         return route().GET(GET_USER_BY_ID_URL, accept(APPLICATION_JSON),userHandler::getUserById)
+                .POST(CREATE_USER_URL,userHandler::createUser)
                 .build();
     }
 }
